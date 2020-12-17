@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>섹션1 복습하기 20201218</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: violet;
+      border: 2px solid #000;
+      transition: 2s;
+    }
+
+    .box:hover {
+      transform: scale(2) translate(100px, 200px);
+    }
+
+    @keyframes sample-ani {
+      0% {
+        transform: translate(0, 0);
+      }
+      50% {
+        background: orange;
+        transform: translate(50px, 30px);
+      }
+      100% {
+        background-color: yellow;
+        transform: translate(100px, 50px);
+      }
+    }
+
+    .ani-box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      border: 2px solid #000;
+      animation: sample-ani 2s linear infinite;
+      animation-direction: alternate;
+    }
+  </style>
+</head>
+<body>
+  <h1>This is transition</h1>
+  <div class="box"></div>
+
+  <h1>This is animation</h1>
+  <div class="ani-box"></div>
+</body>
+</html>
