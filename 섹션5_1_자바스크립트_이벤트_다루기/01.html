@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Interactive Web</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <style>
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .characters {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: #fff000;
+    }
+
+    .ilbuni {
+      width: 100px;
+      cursor: pointer;
+    }
+
+    .characters .ilbuni {
+      display: inline-block;
+    }
+
+    .special {
+      border: 10px dashed red;
+    }
+  </style>
+  <!-- <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      const ilbuni = document.querySelector('.ilbuni.c');
+
+      function clickEventHandler() {
+        ilbuni.classList.toggle('special');
+      }
+      ilbuni.addEventListener('click', clickEventHandler);
+    });
+  </script> -->
+</head>
+
+<body>
+  <div class="characters">
+    <div class="ilbuni a">
+      <img src="images/ilbuni_0.png" alt="일분이">
+    </div>
+    <div class="ilbuni b">
+      <img src="images/ilbuni_1.png" alt="일분이">
+    </div>
+    <div class="ilbuni c">
+      <img src="images/ilbuni_2.png" alt="일분이">
+    </div>
+    <div class="ilbuni d">
+      <img src="images/ilbuni_3.png" alt="일분이">
+    </div>
+  </div>
+
+  <script>
+        // const ilbuni = document.querySelector('.ilbuni:nth-child(3)');
+        // ilbuni.addEventListener('click', function() {
+        //   ilbuni.classList.toggle('special');
+        // });
+
+        // 1. 일반적인 함수 호출
+        // function ilbuni() {
+        //   const ilbuni = document.querySelector('.ilbuni.c');
+        //
+        //   function clickEventHandler() {
+        //     ilbuni.classList.toggle('special');
+        //   }
+        //   ilbuni.addEventListener('click', clickEventHandler);
+        // }
+        // ilbuni();
+
+        // 2. 바로 함수 호출해서 실행시키기
+        // (function() {
+        //   const ilbuni = document.querySelector('.ilbuni.c');
+        //
+        //   function clickEventHandler() {
+        //     ilbuni.classList.toggle('special');
+        //   }
+        //   ilbuni.addEventListener('click', clickEventHandler);
+        // })();
+
+        (function() {
+          const characters = document.querySelector('.characters');
+
+          function clickEvent(e) {
+            console.log(e.target);
+          }
+
+          characters.addEventListener('click', clickEvent);
+        })();
+    </script>
+</body>
+
+</html>
