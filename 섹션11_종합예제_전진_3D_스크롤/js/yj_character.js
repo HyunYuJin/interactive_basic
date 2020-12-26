@@ -34,8 +34,10 @@ function Character(info) {
   this.scrollState = false;
   this.lastScrollTop = 0;
   this.xPos = info.xPos;
-  this.speed =  0.3;
+  this.speed = info.speed;
   this.direction;
+  this.runningState = false;
+  this.rafId;
   this.init();
 }
 
@@ -71,6 +73,8 @@ Character.prototype = {
     });
 
     window.addEventListener('keydown', function(e) {
+      if (self.runningState) return;
+
       if (e.keyCode == 37) {
         // 왼쪽
         self.direction = 'left';
@@ -78,6 +82,7 @@ Character.prototype = {
         self.mainElem.classList.add('running');
         self.run(self);
         // self.run();
+        self.runningState = true;
       } else if (e.keyCode == 39) {
         // 오른쪽
         self.direction = 'right';
@@ -85,11 +90,14 @@ Character.prototype = {
         self.mainElem.classList.add('running');
         self.run(self);
         // self.run();
+        self.runningState = true;
       }
     });
 
     window.addEventListener('keyup', function(e) {
       self.mainElem.classList.remove('running');
+      cancelAnimationFrame(self.rafId);
+      self.runningState = false;
     });
   },
 
@@ -109,7 +117,7 @@ Character.prototype = {
     }
 
     self.mainElem.style.left = self.xPos + '%';
-    requestAnimationFrame(function() {
+    self.rafId = requestAnimationFrame(function() {
       self.run(self);
     });
   }
