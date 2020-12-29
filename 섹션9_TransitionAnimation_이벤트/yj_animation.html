@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Transition & Animation</title>
+  <style>
+    @keyframes ball-ani {
+      from {
+        transform: translate(20px, 30px);
+      }
+      to {
+        transform: translate(80px, 70px);
+      }
+    }
+
+    .ball {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      border-radius: 50%;
+      transition: 2s;
+    }
+
+    .ball.start {
+      background: orange;
+    }
+  </style>
+</head>
+<body>
+  <div class="ball"></div>
+
+  <script>
+    const ballElem = document.querySelector('.ball');
+
+    window.addEventListener('click', function(e) {
+      // ballElem.style.transform = 'translate(' + (e.clientX + 30) + 'px, ' + (e.clientY + 30) + 'px)';
+      ballElem.style.animation = 'ball-ani 1s alternate infinite forwards';
+    });
+
+    ballElem.addEventListener('animationstart', function(e) {
+      ballElem.classList.add('start');
+    });
+  </script>
+</body>
+</html>
