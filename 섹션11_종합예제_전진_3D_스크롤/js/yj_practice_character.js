@@ -30,4 +30,57 @@ function Character(info) {
 
   document.querySelector('.stage').appendChild(this.mainElem);
   this.mainElem.style.left = info.xPos + '%';
+  // 스크롤 중인지 아닌지
+  this.scrollState = false;
+  this.lastScrollTop = 0;
+
+  this.init();
+}
+
+Character.prototype = {
+  constructor: Character,
+  init: function() {
+    const self = this;
+
+    window.addEventListener('scroll', function() {
+      clearTimeout(self.scrollState);
+
+      if (!self.scrollState) {
+        self.mainElem.classList.add('running');
+      }
+
+      self.scrollState = setTimeout(function() {
+        self.scrollState = false;
+        self.mainElem.classList.remove('running');
+      }, 500);
+
+      if (self.lastScrollTop < pageYOffset) {
+        self.mainElem.setAttribute('data-direction', 'forward');
+      } else {
+        self.mainElem.setAttribute('data-direction', 'backward');
+      }
+
+      self.lastScrollTop = pageYOffset;
+    });
+
+    window.addEventListener('keydown', function(e) {
+      if (self.scrollState) return;
+
+      if (e.keyCode == 37) {
+        self.mainElem.setAttribute('data-direction', 'left');
+        self.mainElem.classList.add('running');
+        self.runningState = true;
+      }
+      if (e.keyCode == 39) {
+        self.mainElem.setAttribute('data-direction', 'right');
+        self.mainElem.classList.add('running');
+        self.runningState = true;
+      }
+    });
+
+    window.addEventListener('keyup', function(e) {
+      self.mainElem.classList.remove('running');
+      self.runningState = false;
+    })
+  }
 }
