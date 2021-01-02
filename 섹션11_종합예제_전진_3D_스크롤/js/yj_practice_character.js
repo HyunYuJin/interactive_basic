@@ -33,7 +33,11 @@ function Character(info) {
   // 스크롤 중인지 아닌지
   this.scrollState = false;
   this.lastScrollTop = 0;
-
+  this.xPos = info.xPos;
+  this.speed = info.speed;
+  this.direction;
+  this.runningState = false;
+  this.rafId;
   this.init();
 }
 
@@ -64,23 +68,49 @@ Character.prototype = {
     });
 
     window.addEventListener('keydown', function(e) {
-      if (self.scrollState) return;
+      if (self.runningState) return;
 
       if (e.keyCode == 37) {
+        self.direction = 'left';
         self.mainElem.setAttribute('data-direction', 'left');
         self.mainElem.classList.add('running');
+        self.run(self);
         self.runningState = true;
       }
       if (e.keyCode == 39) {
+        self.direction = 'right';
         self.mainElem.setAttribute('data-direction', 'right');
         self.mainElem.classList.add('running');
+        self.run(self);
         self.runningState = true;
       }
     });
 
     window.addEventListener('keyup', function(e) {
       self.mainElem.classList.remove('running');
+      cancelAnimationFrame(self.rafId);
       self.runningState = false;
-    })
+    });
+  },
+
+  run: function(self) {
+    if (self.direction == 'left') {
+      self.xPos -= self.speed;
+    } else if (self.direction == 'right') {
+      self.xPos += self.speed;
+    }
+
+    if (self.xPos < 2) {
+      self.xPos = 2;
+    }
+
+    if (self.xPos > 88) {
+      self.xPos = 88;
+    }
+
+    self.mainElem.style.left = self.xPos + '%';
+    self.rafId = requestAnimationFrame(function() {
+      self.run(self);
+    });
   }
 }
