@@ -23,6 +23,10 @@ a {
 
 /* global-nav */
 .global-nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 	height: 44px;
 	padding: 0 1rem;
 }
@@ -33,7 +37,6 @@ a {
 	max-width: 1000px;
 	height: 100%;
 	margin: 0 auto;
-	padding: 0 1rem;
 }
 
 .global-nav-link {
@@ -42,13 +45,18 @@ a {
 
 /* local-nav */
 .local-nav {
+	position: absolute;
+	top: 45px;
+	left: 0;
+	width: 100%;
 	height: 52px;
 	border-bottom: 1px solid #DDDDDD;
+	padding: 0 1rem;
 }
 
 .local-nav-link .product-name { /* 그냥 .product-name로만 써주면 a태그 전체에 적용한 0.8rem에서 우선순위가 밀리기 때문에 구체적으로 작성해주어야 단독 클래스로 인식해서 적용이 된다. */
 	margin-right: auto;
-	font-size: 1.2rem;
+	font-size: 1.4rem;
 	font-weight: bold;
 }
 
@@ -62,6 +70,7 @@ a {
 
 /* scroll-section */
 .scroll-section {
+	position: relative;
 	padding-top: 50vh;
 }
 
@@ -149,6 +158,21 @@ a {
 	height: 7rem;
 	color: #FFFFFF;
 	background-color: darkorange;
+}
+
+.sticky-elem {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+#show-scene-0 #scroll-section-0 .sticky-elem,
+#show-scene-1 #scroll-section-1 .sticky-elem,
+#show-scene-2 #scroll-section-2 .sticky-elem,
+#show-scene-3 #scroll-section-3 .sticky-elem {
+	display: block;
 }
 
 /* media */
