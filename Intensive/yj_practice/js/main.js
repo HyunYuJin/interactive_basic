@@ -10,7 +10,14 @@
             heightNum: 5, // 브라우저 높이의 5배로
             scrollHeight: 0,
             objs: {
-                container: document.querySelector('#scroll-section-0')
+                container: document.querySelector('#scroll-section-0'),
+                messageA: document.querySelector('#scroll-section-0 .main-message.a'),
+                messageB: document.querySelector('#scroll-section-0 .main-message.b'),
+                messageC: document.querySelector('#scroll-section-0 .main-message.c'),
+                messageD: document.querySelector('#scroll-section-0 .main-message.d')
+            },
+            values: { // values: 어느시점에 등장하고 사라지게 할지 정의하기 위함
+                messageA_opacity: [0, 1] // [시작 값, 끝 값]
             }
         },
         {
@@ -70,20 +77,40 @@
 			prevScrollHeight += sceneInfo[i].scrollHeight; // 이전 구간의 전체 scroll height
 		}
 
-        // yOffset(현재 스크롤의 위치)가 prevScrollHeight + + sceneInfo[currentScene](현재 보고있는 위치)보다 클 경우 currentScene + 1을 해서 scene을 바꿔준다.
+        // yOffset(현재 스크롤의 위치)가 prevScrollHeight + sceneInfo[currentScene](현재 보고있는 위치)보다 클 경우 currentScene + 1을 해서 scene을 바꿔준다.
         if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
             currentScene++;
             document.body.setAttribute('id', `show-scene-${currentScene}`);
         }
         
-        // yOffset(현재 스크롤의 위치)가 prevScrollHeight보다 작을 경우 currentScene -1 1을 해서 scene을 바꿔준다.
+        // yOffset(현재 스크롤의 위치)가 prevScrollHeight보다 작을 경우 currentScene - 1을 해서 scene을 바꿔준다.
         if (yOffset < prevScrollHeight) {
             if (prevScrollHeight === 0) return; // 사파리와 같은 브라우저의 바운스 효과로 인해 마이너스가 되는 것을 방지(모바일)
             currentScene--;
             document.body.setAttribute('id', `show-scene-${currentScene}`);
         }
+
+        function playAnimation() { // 애니메이션이 진행되는 함수
+            switch (currentScene) {
+                case 0:
+                    console.log('0 play');
+                    break;
+                case 1:
+                    console.log('1 play');
+                    break;
+                case 2:
+                    console.log('2 play');
+                    break;
+                case 3:
+                    console.log('3 play');
+                    break;
+            }
+        }
+
+        playAnimation();
     }
 
+    
     window.addEventListener('scroll', () => {
         yOffset = window.pageYOffset;
         scrollLoop();
