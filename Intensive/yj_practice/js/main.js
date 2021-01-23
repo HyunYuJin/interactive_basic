@@ -11,7 +11,7 @@
             scrollHeight: 0,
             objs: {
                 container: document.querySelector('#scroll-section-0'),
-                messageA: document.querySelector('#scroll-section-0 .main-message.a'),
+				messageA: document.querySelector('#scroll-section-0 .main-message.a'),
                 messageB: document.querySelector('#scroll-section-0 .main-message.b'),
                 messageC: document.querySelector('#scroll-section-0 .main-message.c'),
                 messageD: document.querySelector('#scroll-section-0 .main-message.d')
@@ -71,8 +71,13 @@
     }
 
     function calcValues(values, currentYOffset) {
-        // 각 section마다 얼마나 스크롤이 되었는지 비율을 확인
         // currentYOffset: 현재 씬에서 얼마나 스크롤 되었는지
+        let rv;
+        // 현재 씬(스크롤섹션)에서 스크롤된 범위를 비율로 구하기
+        let scrollRatio = currentYOffset / sceneInfo[currentScene].scrollHeight;
+        rv = scrollRatio * (values[1] - values[0]) + values[0];
+
+        return rv;
     }
 
     function scrollLoop() {
@@ -99,14 +104,13 @@
             const objs = sceneInfo[currentScene].objs;
             const values = sceneInfo[currentScene].values;
             let currentYOffset = yOffset - prevScrollHeight; // 현재 스크롤 위치 - 이전 스크롤 높이
-            console.log(currentYOffset);
 
             switch (currentScene) {
                 case 0:
                     // console.log('0 play');
-                    let messageA_opacity_0 = values.messageA_opacity[0]
-                    let messageA_opacity_1 = values.messageA_opacity[1]
-                    calcValues(values.messageA_opacity, currentYOffset);
+                    let messageA_opacity_in = calcValues(values.messageA_opacity, currentYOffset); // 0 ~ 1 사이의 값
+                    objs.messageA.style.opacity = messageA_opacity_in;
+
                     break;
                 case 1:
                     // console.log('1 play');
