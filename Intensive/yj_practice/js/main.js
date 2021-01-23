@@ -70,6 +70,11 @@
         document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
 
+    function calcValues(values, currentYOffset) {
+        // 각 section마다 얼마나 스크롤이 되었는지 비율을 확인
+        // currentYOffset: 현재 씬에서 얼마나 스크롤 되었는지
+    }
+
     function scrollLoop() {
         prevScrollHeight = 0;
 
@@ -91,18 +96,26 @@
         }
 
         function playAnimation() { // 애니메이션이 진행되는 함수
+            const objs = sceneInfo[currentScene].objs;
+            const values = sceneInfo[currentScene].values;
+            let currentYOffset = yOffset - prevScrollHeight; // 현재 스크롤 위치 - 이전 스크롤 높이
+            console.log(currentYOffset);
+
             switch (currentScene) {
                 case 0:
-                    console.log('0 play');
+                    // console.log('0 play');
+                    let messageA_opacity_0 = values.messageA_opacity[0]
+                    let messageA_opacity_1 = values.messageA_opacity[1]
+                    calcValues(values.messageA_opacity, currentYOffset);
                     break;
                 case 1:
-                    console.log('1 play');
+                    // console.log('1 play');
                     break;
                 case 2:
-                    console.log('2 play');
+                    // console.log('2 play');
                     break;
                 case 3:
-                    console.log('3 play');
+                    // console.log('3 play');
                     break;
             }
         }
